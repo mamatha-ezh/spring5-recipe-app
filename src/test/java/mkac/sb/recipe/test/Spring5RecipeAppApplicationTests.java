@@ -1,4 +1,4 @@
-package guru.springframework;
+package mkac.sb.recipe.test;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

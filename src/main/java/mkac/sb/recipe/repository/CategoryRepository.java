@@ -5,6 +5,7 @@
  */
 package mkac.sb.recipe.repository;
 
+import java.util.Optional;
 import mkac.sb.recipe.domain.Category;
 import org.springframework.data.repository.CrudRepository;
 
@@ -13,5 +14,6 @@ import org.springframework.data.repository.CrudRepository;
  * @author mamat
  */
 public interface CategoryRepository extends CrudRepository<Category,Long>{
+   Optional<Category> findByDescription(String desc);
     
 }

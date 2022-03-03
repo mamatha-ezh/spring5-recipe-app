@@ -5,6 +5,7 @@
  */
 package mkac.sb.recipe.domain;
 
+import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -29,27 +30,36 @@ public class Recipe {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    
     private String description;
     private Integer prepTime;
     private Integer cookingTime;
     private Integer servings;
     private String source;
     private String url;
+    @Lob
     private String directions;
     @Lob
     private Byte[] image;
     @OneToOne(cascade=CascadeType.ALL)
     private Note notes;
     @OneToMany(cascade=CascadeType.ALL,mappedBy = "recipe")
-    private Set<Ingredient> ingredients;
+    private Set<Ingredient> ingredients = new HashSet();
     
     @Enumerated(value=EnumType.STRING)
     private Difficulty difficulty;
+
+    public Difficulty getDifficulty() {
+        return difficulty;
+    }
+
+    public void setDifficulty(Difficulty difficulty) {
+        this.difficulty = difficulty;
+    }
     
     @ManyToMany
     @JoinTable(name="recipe_category",joinColumns=@JoinColumn(name="recipe_id"),inverseJoinColumns=@JoinColumn(name="category_id"))
-    private Set<Category> categories;
+    private Set<Category> categories = new HashSet();
 
     public Set<Category> getCategories() {
         return categories;
@@ -199,7 +209,15 @@ public class Recipe {
      * @param notes the notes to set
      */
     public void setNotes(Note notes) {
+        notes.setRecipe(this);
         this.notes = notes;
+       
+    }
+    public Recipe addIngredient(Ingredient ingredient){
+        
+        ingredient.setRecipe(this);
+        this.ingredients.add(ingredient);
+        return this;
     }
     
 }

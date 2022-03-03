@@ -5,6 +5,7 @@
  */
 package mkac.sb.recipe.repository;
 
+import java.util.Optional;
 import mkac.sb.recipe.domain.UOM;
 import org.springframework.data.repository.CrudRepository;
 
@@ -13,5 +14,7 @@ import org.springframework.data.repository.CrudRepository;
  * @author mamat
  */
 public interface UOMRepository extends CrudRepository<UOM,Long>{
+    
+    Optional<UOM> findByDescription(String desc);
     
 }

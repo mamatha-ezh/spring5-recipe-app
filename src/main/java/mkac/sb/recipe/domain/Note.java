@@ -19,13 +19,35 @@ import javax.persistence.OneToOne;
 @Entity
 public class Note {
 
+    /**
+     * @return the recipeNotes
+     */
+    public String getRecipeNotes() {
+        return recipeNotes;
+    }
+
+    /**
+     * @param recipeNotes the recipeNotes to set
+     */
+    public void setRecipeNotes(String recipeNotes) {
+        this.recipeNotes = recipeNotes;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @OneToOne
     Recipe recipe;
+
+    public Recipe getRecipe() {
+        return recipe;
+    }
+
+    public void setRecipe(Recipe recipe) {
+        this.recipe = recipe;
+    }
     @Lob
-    String recipeNotes;
+    private String recipeNotes;
 
     public Long getId() {
         return id;
