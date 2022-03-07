@@ -44,12 +44,13 @@ public class CategoryTest {
     public void testGetId() {
         System.out.println("getId");
         Category instance = new Category();
+        instance.setId(1L);
         Long expResult = 1L;
         Long result = instance.getId();
         System.out.println("id :" +expResult);
-        assertEquals(expResult, result);
+        assertEquals(result, expResult);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+       
     }
 
     /**
@@ -62,7 +63,7 @@ public class CategoryTest {
         Category instance = new Category();
         instance.setId(id);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+       
     }
     
 }

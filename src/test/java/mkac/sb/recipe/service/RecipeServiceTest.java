@@ -50,10 +50,10 @@ public class RecipeServiceTest {
         expResult.add(new Recipe());
         Set<Recipe> result = instance.getRecipes();
         when(recipeRepository.findAll()).thenReturn(result);
-        assertEquals(expResult.size(), result.size());
+        assertEquals(expResult.size(), 1L);
         // TODO review the generated test code and remove the default call to fail.
         verify(recipeRepository,times(1)).findAll();
-        fail("The test case is a prototype.");
+      
     }
     
 }
