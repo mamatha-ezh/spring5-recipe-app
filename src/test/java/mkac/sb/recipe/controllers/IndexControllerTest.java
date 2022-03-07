@@ -10,22 +10,29 @@ import java.util.Set;
 import mkac.sb.recipe.domain.Recipe;
 import mkac.sb.recipe.service.RecipeServable;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.mockito.ArgumentCaptor;
-import static org.mockito.ArgumentMatchers.anySet;
 import static org.mockito.ArgumentMatchers.eq;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import static org.mockito.Mockito.when;
 import org.mockito.MockitoAnnotations;
+import org.springframework.test.web.servlet.MockMvc;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+
 import org.springframework.ui.Model;
 
+/*
 /**
  *
  * @author mamat
- */
+ * /
+*/
+
 public class IndexControllerTest {
     @Mock
     RecipeServable recipeServable;
@@ -39,11 +46,7 @@ public class IndexControllerTest {
         controller = new IndexController(recipeServable);
        
     }
-    
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
+
     @Before
     public void setUp() {
     }
@@ -71,6 +74,13 @@ public class IndexControllerTest {
         Mockito.verify(model,Mockito.times(1)).addAttribute(eq("recipes"), ac.capture());
    
     
+    }
+    
+    @Test 
+    public void testMockMVC() throws Exception{
+        MockMvc mockmvc = MockMvcBuilders.standaloneSetup(controller).build();
+        mockmvc.perform(get("/")).andExpect(status().isOk())
+                .andExpect(view().name("index"));
     }
     
 }
